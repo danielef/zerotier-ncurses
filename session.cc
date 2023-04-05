@@ -2,6 +2,7 @@
 
 void create_empty_file(const std::string& filename) {
   std::ofstream file(filename);
+  file << "{}";
   file.close();
 }
 
@@ -18,3 +19,24 @@ std::string home_dir() {
   }
   return home_dir;
 }
+
+nlohmann::json load_config() {
+  std::string filename = home_dir() + std::filesystem::path::preferred_separator + ".zerotier_ncurses_config";
+  std::cout << "Loading " + filename << std::endl;
+
+  if(std::filesystem::exists(filename)) {
+    std::cout << "File exists!" << std::endl;
+  } else {
+    std::cout << "File does not exist." << std::endl;
+    create_empty_file(filename);
+  }
+  nlohmann::json data;
+  try {
+    std::ifstream input(filename);
+    input >> data;
+  } catch (nlohmann::detail::parse_error& e) {
+    std::cout << "Caught exception: " << e.what() << std::endl;
+  }
+  return data;
+}
+

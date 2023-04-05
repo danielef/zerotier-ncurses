@@ -6,9 +6,12 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include "nlohmann/json.hpp"
 
 void create_empty_file(const std::string& filename);
 
 std::string home_dir();
+
+nlohmann::json load_config();
 
 #endif
