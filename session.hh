@@ -18,6 +18,6 @@ int save_config(nlohmann::json data);
 
 int size_config(nlohmann::json data);
 
-int add_token(nlohmann::json data, const std::string& tkn);
+nlohmann::json add_token(nlohmann::json data, const std::string& tkn);
 
 #endif

@@ -58,12 +58,13 @@ int size_config(nlohmann::json data) {
   return token.size();
 }
 
-int add_token(nlohmann::json data, const std::string& tkn) {
+nlohmann::json add_token(nlohmann::json data, const std::string& tkn) {
   nlohmann::json token = data["token"];
   if (token.size() > 0) {
-
+    token.push_back(tkn);
   } else {
     token = { tkn };
   }
-  return 1;
+  data["token"] = token;
+  return data;
 }
