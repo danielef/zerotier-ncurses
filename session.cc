@@ -40,7 +40,29 @@ nlohmann::json load_config() {
   return data;
 }
 
+int nlohmann::json save_config(nlohmann::json data) {
+  std::string filename = home_dir() + std::filesystem::path::preferred_separator + ".zerotier_ncurses_config";
+  std::cout << "Saving " + filename << std::endl;
+
+  try {
+    std::ofstream output(filename);
+    output << std::setw(4) << data << std::endl;
+  } catch (nlohmann::detail::parse_error& e) {
+    std::cout << "Caught exception: " << e.what() << std::endl;
+  }
+  return data.size();
+}
+
 int size_config(nlohmann::json data) {
   nlohmann::json token = data["token"];
   return token.size();
+}
+
+void add_token(nlohmann::json data, const std::string& tkn) {
+  nlohmann::json token = data["token"];
+  if (token.size() > 0) {
+
+  } else {
+    token = { tkn };
+  }
 }
