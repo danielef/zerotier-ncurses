@@ -18,7 +18,9 @@ int main(int argc, char** argv) {
 
   json data = load_config();
   std::cout << "Number of items in Data: " << data.size() << std::endl;
-  
+  json tokens = data["token"];
+  std::cout << "Number of items in Tokens: " << tokens.size() << std::endl;
+
   return 0;
 }
 
