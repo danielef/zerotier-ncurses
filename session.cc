@@ -40,3 +40,7 @@ nlohmann::json load_config() {
   return data;
 }
 
+int size_config(nlohmann::json data) {
+  nlohmann::json token = data["token"];
+  return token.size();
+}

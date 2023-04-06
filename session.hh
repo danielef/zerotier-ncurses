@@ -14,4 +14,6 @@ std::string home_dir();
 
 nlohmann::json load_config();
 
+int size_config(nlohmann::json data);
+
 #endif
