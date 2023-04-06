@@ -16,4 +16,6 @@ nlohmann::json load_config();
 
 int size_config(nlohmann::json data);
 
+int add_token(nlohmann::json data, const std::string& filename);
+
 #endif
