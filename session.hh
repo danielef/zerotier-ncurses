@@ -14,8 +14,10 @@ std::string home_dir();
 
 nlohmann::json load_config();
 
+int save_config(nlohmann::json data);
+
 int size_config(nlohmann::json data);
 
-int add_token(nlohmann::json data, const std::string& filename);
+int add_token(nlohmann::json data, const std::string& tkn);
 
 #endif

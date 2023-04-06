@@ -40,7 +40,7 @@ nlohmann::json load_config() {
   return data;
 }
 
-int nlohmann::json save_config(nlohmann::json data) {
+int save_config(nlohmann::json data) {
   std::string filename = home_dir() + std::filesystem::path::preferred_separator + ".zerotier_ncurses_config";
   std::cout << "Saving " + filename << std::endl;
 
@@ -58,11 +58,12 @@ int size_config(nlohmann::json data) {
   return token.size();
 }
 
-void add_token(nlohmann::json data, const std::string& tkn) {
+int add_token(nlohmann::json data, const std::string& tkn) {
   nlohmann::json token = data["token"];
   if (token.size() > 0) {
 
   } else {
     token = { tkn };
   }
+  return 1;
 }
