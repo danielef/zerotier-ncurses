@@ -8,6 +8,8 @@
 #include <stdexcept>
 #include "nlohmann/json.hpp"
 
+namespace session {
+
 void create_empty_file(const std::string& filename);
 
 std::string home_dir();
@@ -19,5 +21,7 @@ int save_config(nlohmann::json data);
 int size_config(nlohmann::json data);
 
 nlohmann::json add_token(nlohmann::json data, const std::string& tkn);
+
+}
 
 #endif

@@ -1,5 +1,7 @@
 #include "session.hh"
 
+namespace session {
+
 void create_empty_file(const std::string& filename) {
   std::ofstream file(filename);
   file << "{}";
@@ -77,4 +79,6 @@ nlohmann::json add_token(nlohmann::json data, const std::string& tkn) {
   }
   data["token"] = token;
   return data;
+}
+
 }
