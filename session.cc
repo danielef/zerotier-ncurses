@@ -61,7 +61,17 @@ int size_config(nlohmann::json data) {
 nlohmann::json add_token(nlohmann::json data, const std::string& tkn) {
   nlohmann::json token = data["token"];
   if (token.size() > 0) {
-    token.push_back(tkn);
+    // Looking for repeated tkns
+    bool found = false;
+    for (const auto& val : token) {
+      if (val == tkn) {
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      token.push_back(tkn);
+    }
   } else {
     token = { tkn };
   }
