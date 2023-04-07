@@ -18,6 +18,13 @@ int main(int argc, char** argv) {
   nlohmann::json tokens = config["token"];
   std::cout << "Number of items in Tokens: " << tokens.size() << std::endl;
 
+  config = add_token(config, "bar");
+
+  nlohmann::json tokens2 = config["token"];
+  std::cout << "Number of items in Tokens: " << tokens2.size() << std::endl;
+
+  save_config(config);
+
   return 0;
 }
 
