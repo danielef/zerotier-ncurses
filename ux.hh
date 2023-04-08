@@ -2,11 +2,12 @@
 #define ZEROTIER_UX_HH_
 
 #include <cstdio>
+#include <string>
 #include <ncurses.h>
 
 namespace ux {
   
-  int token_dialog();
+  std::string token_dialog();
 
 }
 
