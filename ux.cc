@@ -2,7 +2,7 @@
 
 namespace ux {
   
-  int token_dialog() {
+  std::string token_dialog() {
 
     int height = 5, width = 40, start_y, start_x;
 
@@ -26,12 +26,11 @@ namespace ux {
     wrefresh(inputBox);
 
     // Get user input from the text input box
-    char name[20];
+    char name[32];
     mvwgetstr(inputBox, 0, 1, name);
     //int c = getchar();
 
-
-    return 0;
+    return std::string(name);
   }
   
 }
