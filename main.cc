@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+
 #include "session.hh"
 #include "ux.hh"
 #include "nlohmann/json.hpp"
@@ -29,10 +30,12 @@ int main(int argc, char** argv) {
   // Initialize ncurses
   initscr();
 
-  ux::token_dialog();
+  std::string token = ux::token_dialog();
   
   // Clean up ncurses
   endwin();
-            
+
+  std::cout << "Token: '" << token << "'"<< std::endl;
+
   return 0;
 }
