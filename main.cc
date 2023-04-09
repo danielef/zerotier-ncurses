@@ -29,13 +29,16 @@ int main(int argc, char** argv) {
   
   // Initialize ncurses
   initscr();
-
-  std::string token = ux::token_dialog();
+  start_color();
+  auto [fg, bg] = ux::initial_colors();
+  int c = ux::draw_tabs();
+  //std::string token = ux::token_dialog();
   
   // Clean up ncurses
   endwin();
 
-  std::cout << "Token: '" << token << "'"<< std::endl;
+  std::cout << "tab: '" << c << "'" << std::endl;
+  std::cout << "colors: fg: " << fg << ", bg: " <<  bg << std::endl;
 
   return 0;
 }
