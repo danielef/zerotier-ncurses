@@ -10,17 +10,17 @@
 
 namespace session {
 
-void create_empty_file(const std::string& filename);
+  void create_empty_file(const std::string& filename);
 
-std::string home_dir();
+  std::string home_dir();
 
-nlohmann::json load_config();
+  nlohmann::json load_config();
 
-int save_config(nlohmann::json data);
+  int save_config(nlohmann::json data);
 
-int size_config(nlohmann::json data);
+  int size_config(nlohmann::json data);
 
-nlohmann::json add_token(nlohmann::json data, const std::string& tkn);
+  nlohmann::json add_token(nlohmann::json data, const std::string& tkn);
 
 }
 
