@@ -7,7 +7,7 @@ namespace session {
     file << "{}";
     file.close();
   }
-  
+
   std::string home_dir() {
     const char* home_env_var = std::getenv("HOME");
     const char* userprofile_env_var = std::getenv("USERPROFILE");
@@ -21,7 +21,7 @@ namespace session {
     }
     return home_dir;
   }
-  
+
   nlohmann::json load_config() {
     std::string filename = home_dir() + std::filesystem::path::preferred_separator + ".zerotier_ncurses_config";
     std::cout << "Loading " + filename << std::endl;
@@ -54,12 +54,12 @@ namespace session {
     }
     return data.size();
   }
-  
+
   int size_config(nlohmann::json data) {
     nlohmann::json token = data["token"];
     return token.size();
   }
-  
+
   nlohmann::json add_token(nlohmann::json data, const std::string& tkn) {
     nlohmann::json token = data["token"];
     if (token.size() > 0) {
