@@ -6,6 +6,14 @@ cc_binary(
 )
 
 cc_library(
+    name = "net",
+    srcs = ["net.cc"],
+    hdrs = ["net.hh"],
+    copts = ["-std=c++17"],
+    linkopts = ["-lcurl"],
+)
+
+cc_library(
     name = "session",
     srcs = ["session.cc"],
     hdrs = ["session.hh"],
