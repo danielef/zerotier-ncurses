@@ -1,7 +1,7 @@
 cc_binary(
     name = "foo",
     srcs = ["main.cc"],
-    deps = [":session", ":ux", "@com_github_nlohmann_json//:json"],
+    deps = [":net", ":session", ":ux", "@com_github_nlohmann_json//:json"],
     copts = ["-std=c++17"],
 )
 
@@ -11,6 +11,7 @@ cc_library(
     hdrs = ["net.hh"],
     copts = ["-std=c++17"],
     linkopts = ["-lcurl"],
+    deps = ["@com_github_nlohmann_json//:json"],
 )
 
 cc_library(
