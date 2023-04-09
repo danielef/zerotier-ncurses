@@ -1,9 +1,79 @@
 #include "ux.hh"
 
 namespace ux {
+
+  std::array<short, 2> initial_colors() {
+    short foreground, background;
+    pair_content(1, &foreground, &background);
+    return {foreground, background};
+  }
+  
+  int draw_tabs() {
+    // create the container window
+    WINDOW *container_win = newwin(10, 40, 5, 5);
+    box(container_win, 0, 0);
+    wrefresh(container_win);
+    
+    // create the sub-windows
+    WINDOW *sub_win1 = newwin(8, 38, 6, 6);
+    WINDOW *sub_win2 = newwin(8, 38, 6, 6);
+    
+    // add content to the sub-windows
+    wprintw(sub_win1, "This is sub-window 1");
+    wprintw(sub_win2, "This is sub-window 2");
+    
+    // refresh the sub-windows to show the content
+    wrefresh(sub_win1);
+    wrefresh(sub_win2);
+    
+    
+    // track the active sub-window index
+    int active_win_index = 0;
+    
+    // loop to handle key-press events
+    int ch;
+    while ((ch = getchar()) != 'q') {
+      switch (ch) {
+      case '\t':  // switch to the next sub-window
+        active_win_index = (active_win_index + 1) % 2;
+        break;
+      case '1':   // switch to sub-window 1
+        active_win_index = 0;
+        break;
+      case '2':   // switch to sub-window 2
+        active_win_index = 1;
+        break;
+      default:
+        break;
+      }
+      
+      // highlight the active sub-window
+      if (active_win_index == 0) {
+        wbkgd(sub_win1, COLOR_PAIR(1));
+        wbkgd(sub_win2, COLOR_PAIR(2));
+        wrefresh(sub_win1);
+      } else {
+        wbkgd(sub_win1, COLOR_PAIR(2));
+        wbkgd(sub_win2, COLOR_PAIR(1));
+        wrefresh(sub_win2);
+      }
+      
+      // refresh the sub-windows to show the changes
+      
+      
+    }
+    
+    //int c = getchar();
+    return ch;
+
+    // clean up the windows
+    //delwin(sub_win1);
+    //delwin(sub_win2);
+    //delwin(container_win);
+  }
+
   
   std::string token_dialog() {
-
     int height = 5, width = 40, start_y, start_x;
 
     // get the dimensions of the terminal
