@@ -1,9 +1,11 @@
 #ifndef ZEROTIER_REQUEST_H_
 #define ZEROTIER_REQUEST_H_
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <string>
 #include <curl/curl.h>
+#include "nlohmann/json.hpp"
 
 namespace net {
 
@@ -11,7 +13,7 @@ namespace net {
 
   std::string make_json_request(const std::string& url, const std::string& token);
 
-  std::string retrieve_networks(const std::string& token);
+  nlohmann::json retrieve_networks(const std::string& token);
 
 }
 
