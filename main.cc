@@ -9,7 +9,6 @@
 #include "nlohmann/json.hpp"
 
 int main(int argc, char** argv) {
-  //json data;
   //input >> data;
 
   std::cout << "Foo" << std::endl;
