@@ -9,7 +9,7 @@
 #include "nlohmann/json.hpp"
 
 int main(int argc, char** argv) {
-  //input >> data;
+
 
   std::cout << "Foo" << std::endl;
   std::cout << "Path separator: " << std::filesystem::path::preferred_separator << std::endl;
