@@ -22,25 +22,27 @@ int main(int argc, char** argv) {
   initscr();
   start_color();
   auto [fg, bg] = ux::initial_colors();
-  
+  endwin();
   if (session::size_config(config) == 0 || tokens.size() == 0) {
     // First session
     std::string token = ux::token_dialog();
     config = session::add_token(config, token);
     session::save_config(config);
   } else {
-    
+    std::cout << "here!" << std::endl;
+    for (int i=0; i<tokens.size(); i++) {
+      std::cout << "idx: '" << i << "'" << std::endl;
+      nlohmann::json nets = net::retrieve_networks(tokens[i]);
+      std::cout << std::setw(4) << nets << std::endl;
+    }
     
   }
   
   // Clean up ncurses
-  endwin();
 
   //std::cout << "tab: '" << c << "'" << std::endl;
   std::cout << "colors: fg: " << fg << ", bg: " <<  bg << std::endl;
-  
-  nlohmann::json nets = net::retrieve_networks("96YhoypNg9vu4cghitwfPBry3oiBb3C8");
-  std::cout << std::setw(4) << nets << std::endl;
+
 
   return 0;
 }
