@@ -21,24 +21,23 @@ int main(int argc, char** argv) {
   nlohmann::json tokens = config["token"];
   std::cout << "Number of items in Tokens: " << tokens.size() << std::endl;
 
-  config = session::add_token(config, "bar");
-
-  nlohmann::json tokens2 = config["token"];
-  std::cout << "Number of items in Tokens: " << tokens2.size() << std::endl;
-
-  session::save_config(config);
+  //nlohmann::json tokens2 = config["token"];
+  //std::cout << "Number of items in Tokens: " << tokens2.size() << std::endl;
   
   // Initialize ncurses
   initscr();
   start_color();
   auto [fg, bg] = ux::initial_colors();
-  int c = ux::draw_tabs();
-  //std::string token = ux::token_dialog();
+  if (session::size_config(config) == 0 || tokens.size() == 0) {
+    std::string token = ux::token_dialog();
+    config = session::add_token(config, token);
+    session::save_config(config);
+  }
   
   // Clean up ncurses
   endwin();
 
-  std::cout << "tab: '" << c << "'" << std::endl;
+  //std::cout << "tab: '" << c << "'" << std::endl;
   std::cout << "colors: fg: " << fg << ", bg: " <<  bg << std::endl;
   
   nlohmann::json nets = net::retrieve_networks("96YhoypNg9vu4cghitwfPBry3oiBb3C8");
