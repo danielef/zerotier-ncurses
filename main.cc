@@ -9,7 +9,6 @@
 #include "nlohmann/json.hpp"
 
 int main(int argc, char** argv) {
-  //std::ifstream input("example.json");
   //json data;
   //input >> data;
 
@@ -28,10 +27,15 @@ int main(int argc, char** argv) {
   initscr();
   start_color();
   auto [fg, bg] = ux::initial_colors();
+  
   if (session::size_config(config) == 0 || tokens.size() == 0) {
+    // First session
     std::string token = ux::token_dialog();
     config = session::add_token(config, token);
     session::save_config(config);
+  } else {
+    
+    
   }
   
   // Clean up ncurses
