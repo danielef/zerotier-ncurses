@@ -17,9 +17,6 @@ int main(int argc, char** argv) {
   std::cout << "Number of items in Data: " << session::size_config(config) << std::endl;
   nlohmann::json tokens = config["token"];
   std::cout << "Number of items in Tokens: " << tokens.size() << std::endl;
-
-  //nlohmann::json tokens2 = config["token"];
-  //std::cout << "Number of items in Tokens: " << tokens2.size() << std::endl;
   
   // Initialize ncurses
   initscr();
