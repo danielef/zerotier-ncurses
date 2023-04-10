@@ -31,8 +31,8 @@ int main(int argc, char** argv) {
   } else {
     std::cout << "here!" << std::endl;
     for (int i=0; i<tokens.size(); i++) {
-      std::cout << "idx: '" << i << "'" << std::endl;
       nlohmann::json nets = net::retrieve_networks(tokens[i]);
+      std::cout << "idx: '" << i << "'" << ", name: '" << nets[0]["config"]["name"]  << "'"<< std::endl;
       std::cout << std::setw(4) << nets << std::endl;
     }
     
