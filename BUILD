@@ -2,7 +2,7 @@ cc_binary(
     name = "foo",
     srcs = ["main.cc"],
     deps = [":net", ":session", ":ux", "@com_github_nlohmann_json//:json"],
-    copts = ["-std=c++17"],
+    copts = ["-std=c++20"],
 )
 
 cc_library(
