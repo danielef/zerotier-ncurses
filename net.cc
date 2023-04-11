@@ -62,5 +62,17 @@ namespace net {
     }
     return data;
   }
+
+  nlohmann::json retrieve_members(const std::string& token, const std::string& network_id) {
+    nlohmann::json data;
+    try {
+      std::string url = "https://my.zerotier.com/api/network/" + network_id + "/member";
+      std::string req = make_json_request(url, token);
+      data = nlohmann::json::parse(req);
+    } catch (nlohmann::detail::parse_error& e) {
+      std::cout << "Caught exception: " << e.what() << std::endl;
+    }
+    return data;
+  }
   
 }
