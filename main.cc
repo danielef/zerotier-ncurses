@@ -31,13 +31,18 @@ int main(int argc, char** argv) {
   } else {
     std::cout << "here!" << std::endl;
     for (int i=0; i<tokens.size(); i++) {
-      std::string tkn = tokens[i];
-      nlohmann::json nets = net::retrieve_networks(tkn);
-      std::cout << "idx: '" << i << "'" << ", name: '" << nets[0]["config"]["name"]  << "'"<< std::endl;
-      std::cout << "idx: '" << i << "'" << ", id: '" << nets[0]["id"]  << "'"<< std::endl;
-      std::cout << std::setw(4) << nets << std::endl;
-      nlohmann::json mems = net::retrieve_members(tokens[i], nets[0]["id"]);
+      std::string current_token = tokens[i];
+      std::string network_id    = nets[0]["id"];
+      std::string network_name  = nets[0]["config"]["name"];
+      nlohmann::json nets = net::retrieve_networks(current_token);
+      nlohmann::json mems = net::retrieve_members(current_token, network_id);
+
+      std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
+      std::cout << "idx: '" << i << "'" << ", name: '" << network_name << "'"<< std::endl;
+      std::cout << "" << std::endl;      
+      std::cout << std::setw(4) << nets << std::endl;      
       std::cout << std::setw(4) << mems << std::endl;
+
       // We need to extract here data from nets and also for members!
     }
     
