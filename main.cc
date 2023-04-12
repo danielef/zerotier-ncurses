@@ -38,15 +38,17 @@ int main(int argc, char** argv) {
       std::string network_id    = nets[0]["id"];
       std::string network_name  = nets[0]["config"]["name"];
       
+      // We need to extract here data from nets and also for members!
       nlohmann::json mems = net::retrieve_members(current_token, network_id);
 
       std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
       std::cout << "idx: '" << i << "'" << ", name: '" << network_name << "'"<< std::endl;
       std::cout << "" << std::endl;      
-      std::cout << std::setw(4) << nets << std::endl;      
-      std::cout << std::setw(4) << mems << std::endl;
+      // std::cout << std::setw(4) << nets << std::endl;      
+      // std::cout << std::setw(4) << mems << std::endl;
 
-      // We need to extract here data from nets and also for members!
+
+      
     }
     
   }
