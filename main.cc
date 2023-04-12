@@ -55,8 +55,8 @@ int main(int argc, char** argv) {
         std::string m_ip   = mems[j]["config"]["ipAssignments"][0];
         
         std::cout << "name: '" << m_name << "', ip :'" << m_ip << "'" << std::endl;
-        std::cout << mems[j]["lastOnline"] << " : " << mems[j]["lastSeen"] << " : " << ts << std::endl;
-        std::cout << std::setw(4) <<  mems[j]["config"] << std::endl;      
+        std::cout << mems[j]["clock"] << " : " << mems[j]["lastSeen"] << " : " << ts << std::endl;
+        //std::cout << std::setw(4) <<  mems[j]["config"] << std::endl;      
       }
       
       
