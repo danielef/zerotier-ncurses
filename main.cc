@@ -1,4 +1,4 @@
-
+#include <ctime>
 #include <iostream>
 #include <fstream>
 #include <filesystem>
@@ -56,6 +56,10 @@ int main(int argc, char** argv) {
         std::cout << std::setw(4) <<  mems[j]["config"] << std::endl;      
       }
       
+      std::time_t result = std::time(nullptr);
+      std::cout << std::asctime(std::localtime(&result))
+                << result << " seconds since the Epoch\n";
+
     }
     
   }
