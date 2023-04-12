@@ -47,18 +47,21 @@ int main(int argc, char** argv) {
       // std::cout << std::setw(4) << nets << std::endl;      
       // std::cout << std::setw(4) << mems << std::endl;
 
+      std::time_t ts = std::time(nullptr);
       for (int j=0; j<mems.size(); j++) {
-        //std::string m_name = mems[j]["name"];
-        //nlohmann::json m_cfg  = mems[j]["config"];
-        //std::string m_ip   = mems[j]["config"]["ipAssignments"];
+        std::string m_name = mems[j]["name"];
         
-        std::cout << "name: '" << mems[j]["name"] << "', ip :'" << mems[j]["config"]["ipAssignments"][0] << "'" << std::endl;
+        nlohmann::json m_cfg  = mems[j]["config"];
+        std::string m_ip   = mems[j]["config"]["ipAssignments"][0];
+        
+        std::cout << "name: '" << m_name << "', ip :'" << m_ip << "'" << std::endl;
+        std::cout << mems[j]["lastOnline"] << " : " << mems[j]["lastSeen"] << " : " << ts << std::endl;
         std::cout << std::setw(4) <<  mems[j]["config"] << std::endl;      
       }
       
-      std::time_t result = std::time(nullptr);
-      std::cout << std::asctime(std::localtime(&result))
-                << result << " seconds since the Epoch\n";
+      
+      //std::cout << std::asctime(std::localtime(&result))
+      //          << result << " seconds since the Epoch\n";
 
     }
     
