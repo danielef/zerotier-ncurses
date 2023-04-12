@@ -48,12 +48,12 @@ int main(int argc, char** argv) {
       // std::cout << std::setw(4) << mems << std::endl;
 
       for (int j=0; j<mems.size(); j++) {
-        std::string m_name = mems[j]["name"];
-        nlohmann::json m_cfg  = mems[j]["config"];
-        std::string m_ip   = mems[j]["config"]["ipAssignments"];
+        //std::string m_name = mems[j]["name"];
+        //nlohmann::json m_cfg  = mems[j]["config"];
+        //std::string m_ip   = mems[j]["config"]["ipAssignments"];
         
-        std::cout << "name: '" << m_name   << "', ip :'" << m_ip << "'" << std::endl;
-        std::cout << std::setw(4) << m_cfg << std::endl;      
+        std::cout << "name: '" << mems[j]["name"] << "', ip :'" << mems[j]["config"]["ipAssignments"][0] << "'" << std::endl;
+        std::cout << std::setw(4) <<  mems[j]["config"] << std::endl;      
       }
       
     }
