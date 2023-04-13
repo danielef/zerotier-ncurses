@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
   initscr();
   start_color();
   auto [fg, bg] = ux::initial_colors();
-  endwin();
+
   if (session::size_config(config) == 0 || tokens.size() == 0) {
     // First session
     std::string token = ux::token_dialog();
@@ -67,6 +67,8 @@ int main(int argc, char** argv) {
 
     }
     
+    ux::sub_window();
+    endwin();
   }
   
   // Clean up ncurses
