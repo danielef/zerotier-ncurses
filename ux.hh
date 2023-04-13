@@ -12,6 +12,8 @@ namespace ux {
 
   int draw_tabs();
 
+  int sub_window();
+
   std::string token_dialog();
 
 }
