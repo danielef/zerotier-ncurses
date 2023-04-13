@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
       for (int j=0; j<mems.size(); j++) {
         std::string m_name = mems[j]["name"];
         
-        nlohmann::json m_cfg  = mems[j]["config"];
+//        nlohmann::json m_cfg  = mems[j]["config"];
         std::string m_ip   = mems[j]["config"]["ipAssignments"][0];
         long ts_clock = mems[j]["clock"];
         long ts_last  = mems[j]["lastSeen"];
