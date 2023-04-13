@@ -72,6 +72,21 @@ namespace ux {
     //delwin(container_win);
   }
 
+  int sub_window() {
+    // get the dimensions of the terminal
+    int max_y, max_x;
+    getmaxyx(stdscr, max_y, max_x);
+    
+    int offset_x = 2;
+    int offset_y = 1;
+
+    WINDOW* sub_win = newwin(max_x - offset_x * 2, max_y - offset_y * 2, offset_y, offset_x);
+    wprintw(sub_win, "Hello World!");
+
+    wrefresh(sub_win);
+    int c = getchar();
+    return c;
+  }
   
   std::string token_dialog() {
     int height = 5, width = 40, start_y, start_x;
