@@ -80,9 +80,10 @@ namespace ux {
     int offset_x = 2;
     int offset_y = 1;
 
-    WINDOW* sub_win = newwin(max_x - offset_x * 2, max_y - offset_y * 2, offset_y, offset_x);
-    wprintw(sub_win, "Hello World!");
-
+    WINDOW* sub_win = newwin(max_y - offset_y * 2, max_x - offset_x * 2, offset_y, offset_x);
+    mvwprintw(sub_win, 1, 1, "Hello World!");
+    //wprintw(sub_win, "Hello World!");
+    box(sub_win, 0, 0);
     wrefresh(sub_win);
     int c = getchar();
     return c;
