@@ -2,6 +2,12 @@
 
 namespace ux {
 
+  struct Member {
+    std::string name;
+    std::string ip;
+    long last;
+  };
+
   std::array<short, 2> initial_colors() {
     short foreground, background;
     pair_content(1, &foreground, &background);
@@ -72,7 +78,22 @@ namespace ux {
     //delwin(container_win);
   }
 
-  int sub_window() {
+  std::vector<Member> toMembers(nlohmann::json mems) {
+    std::vector<Member> member;
+    for (int i=0; i < mems.size(); i++) {
+      std::string m_name = mems[i]["name"];
+      std::string m_ip   = mems[i]["config"]["ipAssignments"][0];
+      long ts_clock = mems[i]["clock"];
+      long ts_last  = mems[i]["lastSeen"];
+      long ts_diff  = ts_clock - ts_last;
+      member.push_back({m_name, m_ip, ts_diff});
+    }
+    return member;
+  }
+
+  int sub_window(nlohmann::json mems) {
+    std::vector<Member> member = toMembers(mems);
+
     // get the dimensions of the terminal
     int max_y, max_x;
     getmaxyx(stdscr, max_y, max_x);
@@ -81,7 +102,10 @@ namespace ux {
     int offset_y = 1;
 
     WINDOW* sub_win = newwin(max_y - offset_y * 2, max_x - offset_x * 2, offset_y, offset_x);
-    mvwprintw(sub_win, 1, 1, "Hello World!");
+    for (int i = 0; i < member.size(); i++) {
+      mvwprintw(sub_win, i+1, 2, (" " + member[i].name).c_str());
+    }
+    //mvwprintw(sub_win, 2, 1, "Hello World2");
     //wprintw(sub_win, "Hello World!");
     box(sub_win, 0, 0);
     wrefresh(sub_win);
