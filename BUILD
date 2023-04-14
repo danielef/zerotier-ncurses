@@ -28,4 +28,5 @@ cc_library(
     hdrs = ["ux.hh"],
     copts = ["-std=c++17"],
     linkopts = ["-lncurses"],
+    deps = ["@com_github_nlohmann_json//:json"],
 )
