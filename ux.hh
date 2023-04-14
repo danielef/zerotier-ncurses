@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <string>
 #include <ncurses.h>
+#include "nlohmann/json.hpp"
 
 namespace ux {
 
@@ -12,7 +13,7 @@ namespace ux {
 
   int draw_tabs();
 
-  int sub_window();
+  int sub_window(nlohmann::json mems);
 
   std::string token_dialog();
 
