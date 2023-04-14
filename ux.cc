@@ -8,6 +8,10 @@ namespace ux {
     long last;
   };
 
+  bool compareName(const Member& a, const Member& b) {
+    return a.name < b.name;
+  }
+
   std::array<short, 2> initial_colors() {
     short foreground, background;
     pair_content(1, &foreground, &background);
@@ -93,7 +97,7 @@ namespace ux {
 
   int sub_window(nlohmann::json mems) {
     std::vector<Member> member = toMembers(mems);
-
+    std::sort(member.begin(), member.end(), compareName);
     // get the dimensions of the terminal
     int max_y, max_x;
     getmaxyx(stdscr, max_y, max_x);
