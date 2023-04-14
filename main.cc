@@ -39,6 +39,7 @@ int main(int argc, char** argv) {
       
       // We need to extract here data from nets and also for members!
       nlohmann::json mems = net::retrieve_members(current_token, network_id);
+      ux::sub_window(mems);
 
       std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
       std::cout << "idx: '" << i << "'" << ", name: '" << network_name << "'"<< std::endl;
@@ -47,6 +48,7 @@ int main(int argc, char** argv) {
       // std::cout << std::setw(4) << mems << std::endl;
 
       //std::time_t ts = std::time(nullptr);
+
       for (int j=0; j<mems.size(); j++) {
         std::string m_name = mems[j]["name"];
         
@@ -60,14 +62,11 @@ int main(int argc, char** argv) {
         std::cout << mems[j]["clock"] << " : " << mems[j]["lastSeen"] << " : " << ts_diff << std::endl;
         //std::cout << std::setw(4) <<  mems[j]["config"] << std::endl;      
       }
-      
-      
+
       //std::cout << std::asctime(std::localtime(&result))
       //          << result << " seconds since the Epoch\n";
 
     }
-    
-    ux::sub_window();
     endwin();
   }
   
