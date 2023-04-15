@@ -137,14 +137,14 @@ namespace ux {
             if (mypadpos > 0)
               {
                 //mypadpos--;
-                prefresh(sub_win, --mypadpos, 0, 5, 0, mrow, mcol);
+                prefresh(sub_win, --mypadpos, 0, offset_header, 0, mrow, mcol);
               }
             
             break;
           case 66:
             if (mypadpos < rowcount + 5 - 1)
               {
-               prefresh(sub_win, ++mypadpos, 0, 5, 0, mrow, mcol);
+               prefresh(sub_win, ++mypadpos, 0, offset_header, 0, mrow, mcol);
               }
             
             break;
