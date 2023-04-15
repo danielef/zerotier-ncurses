@@ -142,7 +142,7 @@ namespace ux {
             
             break;
           case 66:
-            if (mypadpos < rowcount + 5 - 1)
+            if (mypadpos < rowcount - 1 + offset_header)
               {
                prefresh(sub_win, ++mypadpos, 0, offset_header, 0, mrow, mcol);
               }
