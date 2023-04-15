@@ -19,9 +19,12 @@ int main(int argc, char** argv) {
   
   // Initialize ncurses
   initscr();
+  curs_set(0);
+  keypad(stdscr, TRUE);
+  noecho();
   start_color();
   auto [fg, bg] = ux::initial_colors();
-
+  int w = 0;
   if (session::size_config(config) == 0 || tokens.size() == 0) {
     // First session
     std::string token = ux::token_dialog();
@@ -39,8 +42,8 @@ int main(int argc, char** argv) {
       
       // We need to extract here data from nets and also for members!
       nlohmann::json mems = net::retrieve_members(current_token, network_id);
-      ux::sub_window(mems);
-
+      w = ux::sub_window(mems);
+      
       std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
       std::cout << "idx: '" << i << "'" << ", name: '" << network_name << "'"<< std::endl;
       std::cout << "" << std::endl;      
@@ -67,13 +70,14 @@ int main(int argc, char** argv) {
       //          << result << " seconds since the Epoch\n";
 
     }
+
     endwin();
   }
   
   // Clean up ncurses
 
   //std::cout << "tab: '" << c << "'" << std::endl;
-  std::cout << "colors: fg: " << fg << ", bg: " <<  bg << std::endl;
+  std::cout << "colors: fg: " << fg << ", bg: " <<  bg << " w: "<<  w << std::endl;
 
 
   return 0;
