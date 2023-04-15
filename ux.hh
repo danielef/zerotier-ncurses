@@ -4,7 +4,7 @@
 #include <array>
 #include <cstdio>
 #include <string>
-
+#include <iostream> // for prints
 #include <ncurses.h>
 #include "nlohmann/json.hpp"
 
