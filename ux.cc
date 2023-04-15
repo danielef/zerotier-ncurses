@@ -105,16 +105,53 @@ namespace ux {
     int offset_x = 2;
     int offset_y = 1;
 
-    WINDOW* sub_win = newwin(max_y - offset_y * 2, max_x - offset_x * 2, offset_y, offset_x);
+    WINDOW* sub_win = newpad(member.size(), max_x - offset_x * 2);
+    
+    std::cout << "x: " << offset_x << "," << max_x - offset_x * 2 << std::endl;
+    std::cout << "y: " << offset_y << "," << max_y - offset_y * 2 << std::endl;
+    int b = getchar();
+    // for (int i = 1; i < member.size() + 1 && i < (max_y - offset_y * 2) - 1  ; i++) {
     for (int i = 0; i < member.size(); i++) {
-      mvwprintw(sub_win, i+1, 2, (" " + member[i].name).c_str());
+      //mvwprintw(sub_win, i, 2, (" " + member[i].name).c_str());
+      wprintw(sub_win, (" " + member[i].name + "\n").c_str());
+      //wrefresh(sub_win);
     }
     //mvwprintw(sub_win, 2, 1, "Hello World2");
     //wprintw(sub_win, "Hello World!");
-    box(sub_win, 0, 0);
-    wrefresh(sub_win);
-    int c = getchar();
-    return c;
+    //box(sub_win, 0, 0);
+    //wrefresh(sub_win);
+    int ch;
+    int ant_ch;
+    int mrow = max_y - offset_y * 2;
+    int mcol = max_x - offset_x * 2;
+    int rowcount = member.size() - mrow;
+    int mypadpos = 0;
+    prefresh(sub_win, 0, 0, 5, 0, mrow, mcol);
+    while((ch = wgetch(sub_win)) != 'q')
+      {
+        ant_ch = ch;
+        switch (ch)
+          {
+          case 65:
+            if (mypadpos > 0)
+              {
+                //mypadpos--;
+                prefresh(sub_win, --mypadpos, 0, 5, 0, mrow, mcol);
+              }
+            
+            break;
+          case 66:
+            if (mypadpos < rowcount + 5 - 1)
+              {
+               prefresh(sub_win, ++mypadpos, 0, 5, 0, mrow, mcol);
+              }
+            
+            break;
+          }
+      }
+
+    //std::cout << "ch: " << ch << std::endl;
+    return ant_ch;
   }
   
   std::string token_dialog() {
