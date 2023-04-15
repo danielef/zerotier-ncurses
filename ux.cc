@@ -126,7 +126,7 @@ namespace ux {
     int mcol = max_x - offset_x * 2;
     int rowcount = member.size() - mrow;
     int mypadpos = 0;
-    int offset_header = 2
+    int offset_header = 2;
     prefresh(sub_win, 0, 0, offset_header, 0, mrow, mcol);
     while((ch = wgetch(sub_win)) != 'q')
       {
