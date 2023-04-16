@@ -118,7 +118,7 @@ namespace ux {
     }
     //mvwprintw(sub_win, 2, 1, "Hello World2");
     //wprintw(sub_win, "Hello World!");
-    //box(sub_win, 0, 0);
+    box(sub_win, 0, 0);
     //wrefresh(sub_win);
     int ch;
     int ant_ch;
