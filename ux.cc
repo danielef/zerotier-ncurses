@@ -102,12 +102,12 @@ namespace ux {
     int max_y, max_x;
     getmaxyx(stdscr, max_y, max_x);
     
-    int offset_x = 2;
+    //int offset_x = 2;
     int offset_y = 1;
 
     WINDOW* sub_win = newpad(member.size(), max_x);
     
-    std::cout << "x: " << offset_x << "," << max_x - offset_x * 2 << std::endl;
+    //std::cout << "x: " << offset_x << "," << max_x - offset_x * 2 << std::endl;
     std::cout << "y: " << offset_y << "," << max_y - offset_y * 2 << std::endl;
     int b = getchar();
     // for (int i = 1; i < member.size() + 1 && i < (max_y - offset_y * 2) - 1  ; i++) {
@@ -123,7 +123,7 @@ namespace ux {
     int ch;
     int ant_ch;
     int mrow = max_y - offset_y * 2;
-    int mcol = max_x - offset_x * 2;
+    int mcol = max_x; // - offset_x * 2;
     int rowcount = member.size() - mrow;
     int mypadpos = 0;
     int offset_header = 2;
