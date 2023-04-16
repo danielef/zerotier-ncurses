@@ -105,7 +105,7 @@ namespace ux {
     int offset_x = 2;
     int offset_y = 1;
 
-    WINDOW* sub_win = newpad(member.size(), max_x - offset_x * 2);
+    WINDOW* sub_win = newpad(member.size(), max_x);
     
     std::cout << "x: " << offset_x << "," << max_x - offset_x * 2 << std::endl;
     std::cout << "y: " << offset_y << "," << max_y - offset_y * 2 << std::endl;
@@ -118,7 +118,7 @@ namespace ux {
     }
     //mvwprintw(sub_win, 2, 1, "Hello World2");
     //wprintw(sub_win, "Hello World!");
-    box(sub_win, 0, 0);
+    //box(sub_win, 0, 0);
     //wrefresh(sub_win);
     int ch;
     int ant_ch;
