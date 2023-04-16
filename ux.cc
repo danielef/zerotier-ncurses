@@ -119,8 +119,8 @@ namespace ux {
     //wrefresh(sub_win);
     int ch;
     int ant_ch;
-    int mrow = max_y - offset_y * 2;
-    int mcol = max_x - offset_x * 2;
+    int mrow = max_y;// - offset_y * 2;
+    int mcol = max_x;// - offset_x * 2;
     int rowcount = member.size() - mrow;
     int mypadpos = 0;
     int offset_header = 2;
