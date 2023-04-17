@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
     config = session::add_token(config, token);
     session::save_config(config);
   } else {
-    std::cout << "here!" << std::endl;
+    //std::cout << "here!" << std::endl;
     for (int i=0; i<tokens.size(); i++) {
       std::string current_token = tokens[i];
       
