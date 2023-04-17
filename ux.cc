@@ -106,7 +106,7 @@ namespace ux {
     int offset_y = 2;
 
     WINDOW* sub_win = newpad(member.size(), max_x);
-    init_pair(1, COLOR_BLACK, COLOR_RED)
+    init_pair(1, COLOR_BLACK, COLOR_RED);
     //std::cout << "x: " << offset_x << "," << max_x - offset_x * 2 << std::endl;
     //std::cout << "y: " << offset_y << "," << max_y - offset_y * 2 << std::endl;
     //int b = getchar();
