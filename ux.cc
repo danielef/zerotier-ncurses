@@ -103,7 +103,7 @@ namespace ux {
     getmaxyx(stdscr, max_y, max_x);
     
     //int offset_x = 2;
-    int offset_y = 1;
+    int offset_y = 2;
 
     WINDOW* sub_win = newpad(member.size(), max_x);
     
@@ -122,12 +122,12 @@ namespace ux {
     //wrefresh(sub_win);
     int ch;
     int ant_ch;
-    int mrow = max_y - offset_y * 2;
+    int mrow = max_y - offset_y;
     int mcol = max_x; // - offset_x * 2;
     int rowcount = member.size() - mrow;
     int mypadpos = 0;
-    int offset_header = 2;
-    prefresh(sub_win, 0, 0, offset_header, 0, mrow, mcol);
+
+    prefresh(sub_win, 0, 0, offset_y, 0, mrow, mcol);
     while((ch = wgetch(sub_win)) != 'q')
       {
         ant_ch = ch;
@@ -137,14 +137,14 @@ namespace ux {
             if (mypadpos > 0)
               {
                 //mypadpos--;
-                prefresh(sub_win, --mypadpos, 0, offset_header, 0, mrow, mcol);
+                prefresh(sub_win, --mypadpos, 0, offset_y, 0, mrow, mcol);
               }
             
             break;
           case 66:
-            if (mypadpos < rowcount - 1 + offset_header)
+            if (mypadpos < rowcount - 1 + offset_y)
               {
-               prefresh(sub_win, ++mypadpos, 0, offset_header, 0, mrow, mcol);
+               prefresh(sub_win, ++mypadpos, 0, offset_y, 0, mrow, mcol);
               }
             
             break;
