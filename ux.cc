@@ -115,7 +115,7 @@ namespace ux {
       //mvwprintw(sub_win, i, 2, (" " + member[i].name).c_str());
       wattron(sub_win, A_BOLD);
       wprintw(sub_win, " - " );
-      refresh(sub_win);
+      wrefresh(sub_win);
       wattroff(sub_win, A_BOLD);
       wrefresh(sub_win);
       wprintw(sub_win, (" " + member[i].name + "\n").c_str());
