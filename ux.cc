@@ -113,10 +113,10 @@ namespace ux {
     // for (int i = 1; i < member.size() + 1 && i < (max_y - offset_y * 2) - 1  ; i++) {
     for (int i = 0; i < member.size(); i++) {
       //mvwprintw(sub_win, i, 2, (" " + member[i].name).c_str());
-      wattron(COLOR_PAIR(1));
+      wattron(sub_win, COLOR_PAIR(1));
       wprintw(sub_win, " - " );
       refresh();
-      wattroff(COLOR_PAIR(1));
+      wattroff(sub_win, COLOR_PAIR(1));
       wprintw(sub_win, (" " + member[i].name + "\n").c_str());
       refresh();
     }
