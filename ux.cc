@@ -106,20 +106,19 @@ namespace ux {
     int offset_y = 2;
 
     WINDOW* sub_win = newpad(member.size(), max_x);
-    
+    init_pair(1, COLOR_BLACK, COLOR_RED)
     //std::cout << "x: " << offset_x << "," << max_x - offset_x * 2 << std::endl;
     //std::cout << "y: " << offset_y << "," << max_y - offset_y * 2 << std::endl;
     //int b = getchar();
     // for (int i = 1; i < member.size() + 1 && i < (max_y - offset_y * 2) - 1  ; i++) {
     for (int i = 0; i < member.size(); i++) {
       //mvwprintw(sub_win, i, 2, (" " + member[i].name).c_str());
-      wattron(sub_win, A_BOLD);
+      wattron(COLOR_PAIR(1));
       wprintw(sub_win, " - " );
-      wrefresh(sub_win);
-      wattroff(sub_win, A_BOLD);
-      wrefresh(sub_win);
+      refresh();
+      wattroff(COLOR_PAIR(1));
       wprintw(sub_win, (" " + member[i].name + "\n").c_str());
-      wrefresh(sub_win);
+      refresh();
     }
     //mvwprintw(sub_win, 2, 1, "Hello World2");
     //wprintw(sub_win, "Hello World!");
