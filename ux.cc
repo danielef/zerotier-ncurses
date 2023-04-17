@@ -108,7 +108,7 @@ namespace ux {
     WINDOW* sub_win = newpad(member.size(), max_x);
     
     //std::cout << "x: " << offset_x << "," << max_x - offset_x * 2 << std::endl;
-    std::cout << "y: " << offset_y << "," << max_y - offset_y * 2 << std::endl;
+    //std::cout << "y: " << offset_y << "," << max_y - offset_y * 2 << std::endl;
     int b = getchar();
     // for (int i = 1; i < member.size() + 1 && i < (max_y - offset_y * 2) - 1  ; i++) {
     for (int i = 0; i < member.size(); i++) {
