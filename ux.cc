@@ -116,16 +116,16 @@ namespace ux {
     for (int i = 0; i < member.size(); i++) {
       int pair = member[i].diff < 60000 ? 3 : member[i].diff < 90000? 2 : 1; 
       //mvwprintw(sub_win, i, 2, (" " + member[i].name).c_str());
-      wattron(sub_win, COLOR_PAIR(pair));
+      wattron(sub_win, A_BOLD | COLOR_PAIR(pair));
       wprintw(sub_win, " - " );
       refresh();
-      wattroff(sub_win, COLOR_PAIR(pair));
+      wattroff(sub_win, A_BOLD | COLOR_PAIR(pair));
       wprintw(sub_win, member[i].name.c_str());
       wprintw(sub_win, " - " );
       wprintw(sub_win, "%d", member[i].diff);
       wprintw(sub_win, "\n");
       refresh();
-    }
+    } 
     //mvwprintw(sub_win, 2, 1, "Hello World2");
     //wprintw(sub_win, "Hello World!");
     //box(sub_win, 0, 0);
