@@ -113,13 +113,16 @@ namespace ux {
     //int b = getchar();
     // for (int i = 1; i < member.size() + 1 && i < (max_y - offset_y * 2) - 1  ; i++) {
     for (int i = 0; i < member.size(); i++) {
-      int pair = member[i].diff < 60 ? 2 : 1; 
+      int pair = member[i].diff < 60000 ? 2 : 1; 
       //mvwprintw(sub_win, i, 2, (" " + member[i].name).c_str());
       wattron(sub_win, COLOR_PAIR(pair));
       wprintw(sub_win, " - " );
       refresh();
       wattroff(sub_win, COLOR_PAIR(pair));
-      wprintw(sub_win, (" " + member[i].name + "\n").c_str());
+      wprintw(sub_win, member[i].name.c_str());
+      wprintw(sub_win, " - " );
+      wprintw(sub_win, "%d", member[i].diff);
+      wprintw(sub_win, "\n");
       refresh();
     }
     //mvwprintw(sub_win, 2, 1, "Hello World2");
