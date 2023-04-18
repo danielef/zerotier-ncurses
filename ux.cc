@@ -5,7 +5,7 @@ namespace ux {
   struct Member {
     std::string name;
     std::string ip;
-    long last;
+    long diff;
   };
 
   bool compareName(const Member& a, const Member& b) {
@@ -113,11 +113,12 @@ namespace ux {
     //int b = getchar();
     // for (int i = 1; i < member.size() + 1 && i < (max_y - offset_y * 2) - 1  ; i++) {
     for (int i = 0; i < member.size(); i++) {
+      int pair = member[i].diff < 60 ? 2 : 1; 
       //mvwprintw(sub_win, i, 2, (" " + member[i].name).c_str());
-      wattron(sub_win, COLOR_PAIR(1));
+      wattron(sub_win, COLOR_PAIR(pair));
       wprintw(sub_win, " - " );
       refresh();
-      wattroff(sub_win, COLOR_PAIR(1));
+      wattroff(sub_win, COLOR_PAIR(pair));
       wprintw(sub_win, (" " + member[i].name + "\n").c_str());
       refresh();
     }
