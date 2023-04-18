@@ -107,13 +107,14 @@ namespace ux {
 
     WINDOW* sub_win = newpad(member.size(), max_x);
     init_pair(1, COLOR_RED,   COLOR_BLACK);
-    init_pair(2, COLOR_GREEN, COLOR_BLACK);
+    init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(3, COLOR_GREEN, COLOR_BLACK);
     //std::cout << "x: " << offset_x << "," << max_x - offset_x * 2 << std::endl;
     //std::cout << "y: " << offset_y << "," << max_y - offset_y * 2 << std::endl;
     //int b = getchar();
     // for (int i = 1; i < member.size() + 1 && i < (max_y - offset_y * 2) - 1  ; i++) {
     for (int i = 0; i < member.size(); i++) {
-      int pair = member[i].diff < 60000 ? 2 : 1; 
+      int pair = member[i].diff < 60000 ? 3 : member[i].diff < 90000? 2 : 1; 
       //mvwprintw(sub_win, i, 2, (" " + member[i].name).c_str());
       wattron(sub_win, COLOR_PAIR(pair));
       wprintw(sub_win, " - " );
