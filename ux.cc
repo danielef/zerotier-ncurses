@@ -122,6 +122,8 @@ namespace ux {
       wattroff(sub_win, A_BOLD | COLOR_PAIR(pair));
       wprintw(sub_win, member[i].name.c_str());
       wprintw(sub_win, " - " );
+      wprintw(sub_win, "%s", member[i].ip.c_str());
+      wprintw(sub_win, " - " );
       wprintw(sub_win, "%d", member[i].diff);
       wprintw(sub_win, "\n");
       refresh();
