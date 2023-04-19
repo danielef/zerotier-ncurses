@@ -1,20 +1,40 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+#include <thread>
+#include <unistd.h>
 
 #include "net.hh"
 #include "session.hh"
 #include "ux.hh"
 #include "nlohmann/json.hpp"
 
+nlohmann::json config;
+nlohmann::json tokens;
+std::vector<nlohmann::json> members;
+int current_members_index = 0;
+
+void update_data() {
+  for (int i=0; i<tokens.size(); i++) {
+    std::string current_token = tokens[i];
+    
+    nlohmann::json nets = net::retrieve_networks(current_token);
+    
+    std::string network_id    = nets[0]["id"];
+    std::string network_name  = nets[0]["config"]["name"];
+    nlohmann::json mems = net::retrieve_members(current_token, network_id);
+    members[i] = mems;
+  }
+}
+
 int main(int argc, char** argv) {
 
   std::cout << "Foo" << std::endl;
   std::cout << "Path separator: " << std::filesystem::path::preferred_separator << std::endl;
 
-  nlohmann::json config = session::load_config();
+  config = session::load_config();
   std::cout << "Number of items in Data: " << session::size_config(config) << std::endl;
-  nlohmann::json tokens = config["token"];
+  tokens = config["token"];
   std::cout << "Number of items in Tokens: " << tokens.size() << std::endl;
   
   // Initialize ncurses
@@ -31,6 +51,7 @@ int main(int argc, char** argv) {
     config = session::add_token(config, token);
     session::save_config(config);
   } else {
+
     //std::cout << "here!" << std::endl;
     for (int i=0; i<tokens.size(); i++) {
       std::string current_token = tokens[i];
@@ -41,9 +62,14 @@ int main(int argc, char** argv) {
       std::string network_name  = nets[0]["config"]["name"];
       
       // We need to extract here data from nets and also for members!
-      nlohmann::json mems = net::retrieve_members(current_token, network_id);
+      nlohmann::json mems;
+
+      while (1) {
+      mems = net::retrieve_members(current_token, network_id);
       w = ux::sub_window(mems);
-      
+      usleep(5000);
+      }
+
       std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
       std::cout << "idx: '" << i << "'" << ", name: '" << network_name << "'"<< std::endl;
       std::cout << "" << std::endl;      
