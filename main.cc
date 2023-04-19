@@ -18,13 +18,18 @@ void update_data() {
   std::cout << members.size() << std::endl;
   for (int i=0; i<tokens.size(); i++) {
     std::string current_token = tokens[i];
-    
+    std::cout << current_token << std::endl;
     nlohmann::json nets = net::retrieve_networks(current_token);
-    
+    std::cout << nets << std::endl;
+
     std::string network_id    = nets[0]["id"];
     std::string network_name  = nets[0]["config"]["name"];
     nlohmann::json mems = net::retrieve_members(current_token, network_id);
-    members[i] = mems;
+    if (members.size() < i) {
+      members.push_back(mems);
+    } else {
+      members[i] = mems;
+    }
     usleep(5000);
   }
 }
