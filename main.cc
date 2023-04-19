@@ -15,21 +15,15 @@ std::vector<nlohmann::json> members;
 int current_members_index = 0;
 
 void update_data() {
-  std::cout << members.size() << std::endl;
   for (int i=0; i<tokens.size(); i++) {
     std::string current_token = tokens[i];
-    std::cout << current_token << std::endl;
+    
     nlohmann::json nets = net::retrieve_networks(current_token);
-    std::cout << nets << std::endl;
-
+    
     std::string network_id    = nets[0]["id"];
     std::string network_name  = nets[0]["config"]["name"];
     nlohmann::json mems = net::retrieve_members(current_token, network_id);
-    if (members.size() < i) {
-      members.push_back(mems);
-    } else {
-      members[i] = mems;
-    }
+    members[i] = mems;
     usleep(5000);
   }
 }
@@ -59,16 +53,47 @@ int main(int argc, char** argv) {
     session::save_config(config);
   } else {
     std::thread updater(update_data);
-    std::cout << "tab: '" << members << "'" << std::endl;
-    /*
+
     while (1) {
       //mems = net::retrieve_members(current_token, network_id);
-      w = ux::sub_window(members[current_members_index]);
-    }*/
-    // Clean up ncurses
+      if (members.size() > 0) {
+        w = ux::sub_window(members[0]);
+      }
+    }
+
+/**
+
+      std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
+      std::cout << "idx: '" << i << "'" << ", name: '" << network_name << "'"<< std::endl;
+      std::cout << "" << std::endl;      
+      // std::cout << std::setw(4) << nets << std::endl;      
+      // std::cout << std::setw(4) << mems << std::endl;
+
+      //std::time_t ts = std::time(nullptr);
+
+      for (int j=0; j<mems.size(); j++) {
+        std::string m_name = mems[j]["name"];
+        
+//        nlohmann::json m_cfg  = mems[j]["config"];
+        std::string m_ip   = mems[j]["config"]["ipAssignments"][0];
+        long ts_clock = mems[j]["clock"];
+        long ts_last  = mems[j]["lastSeen"];
+        long ts_diff  = ts_clock - ts_last;
+
+        std::cout << "name: '" << m_name << "', ip :'" << m_ip << "'" << std::endl;
+        std::cout << mems[j]["clock"] << " : " << mems[j]["lastSeen"] << " : " << ts_diff << std::endl;
+        //std::cout << std::setw(4) <<  mems[j]["config"] << std::endl;      
+      }
+
+      //std::cout << std::asctime(std::localtime(&result))
+      //          << result << " seconds since the Epoch\n";
+
+    }
+**/
     endwin();
   }
   
+  // Clean up ncurses
 
   //std::cout << "tab: '" << c << "'" << std::endl;
   std::cout << "colors: fg: " << fg << ", bg: " <<  bg << " w: "<<  w << std::endl;
