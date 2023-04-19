@@ -22,6 +22,10 @@ void update_data() {
     
     std::string network_id    = nets[0]["id"];
     std::string network_name  = nets[0]["config"]["name"];
+
+    std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
+    std::cout << "idx: '" << i << "'" << ", name: '" << network_name << "'"<< std::endl;
+
     nlohmann::json mems = net::retrieve_members(current_token, network_id);
     members[i] = mems;
     usleep(5000);
@@ -54,6 +58,7 @@ int main(int argc, char** argv) {
   } else {
     std::thread updater(update_data);
 
+/**
     while (1) {
       //mems = net::retrieve_members(current_token, network_id);
       if (members.size() > 0) {
@@ -61,7 +66,7 @@ int main(int argc, char** argv) {
       }
     }
 
-/**
+
 
       std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
       std::cout << "idx: '" << i << "'" << ", name: '" << network_name << "'"<< std::endl;
