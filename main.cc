@@ -19,7 +19,7 @@ void update_data(int r) {
     std::string current_token = tokens[i];
     std::cout << "idx: '" << i << "'" << ", tk: '"   << current_token   << "'"<< std::endl;
     
-    //nlohmann::json nets = net::retrieve_networks(current_token);
+    nlohmann::json nets = net::retrieve_networks(current_token);
     //std::cout << std::setw(4) << nets << std::endl;      
 
     std::string network_id    = "foo"; //nets[0]["id"];
