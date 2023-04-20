@@ -55,6 +55,7 @@ namespace net {
     nlohmann::json data;
     try {
       std::string url = "https://my.zerotier.com/api/network";
+      std::cout << url << std::endl;
       std::string req = make_json_request(url, token);
       data = nlohmann::json::parse(req);
     } catch (nlohmann::detail::parse_error& e) {
