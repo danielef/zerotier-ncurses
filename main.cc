@@ -14,21 +14,23 @@ nlohmann::json tokens;
 std::vector<nlohmann::json> members;
 int current_members_index = 0;
 
-void update_data() {
+void update_data(int r) {
   for (int i=0; i<tokens.size(); i++) {
     std::string current_token = tokens[i];
+    std::cout << "idx: '" << i << "'" << ", tk: '"   << current_token   << "'"<< std::endl;
     
-    nlohmann::json nets = net::retrieve_networks(current_token);
-    
-    std::string network_id    = nets[0]["id"];
-    std::string network_name  = nets[0]["config"]["name"];
+    //nlohmann::json nets = net::retrieve_networks(current_token);
+    //std::cout << std::setw(4) << nets << std::endl;      
+
+    std::string network_id    = "foo"; //nets[0]["id"];
+    std::string network_name  = "bar";//nets[0]["config"]["name"];
 
     std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
     std::cout << "idx: '" << i << "'" << ", name: '" << network_name << "'"<< std::endl;
 
     nlohmann::json mems = net::retrieve_members(current_token, network_id);
     members[i] = mems;
-    usleep(5000);
+    //usleep(5000);
   }
 }
 
@@ -56,7 +58,7 @@ int main(int argc, char** argv) {
     config = session::add_token(config, token);
     session::save_config(config);
   } else {
-    std::thread updater(update_data);
+    std::thread t1(update_data,0);
 
 /**
     while (1) {
