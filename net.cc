@@ -18,7 +18,7 @@ namespace net {
     CURLcode res;
     std::string response;
     
-    curl_global_init(CURL_GLOBAL_ALL);
+    
     
     curl = curl_easy_init();
     if(curl) {
