@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-#include <thread>
+#include <future>
 #include <unistd.h>
 
 #include "net.hh"
@@ -11,25 +11,32 @@
 
 nlohmann::json config;
 nlohmann::json tokens;
+std::mutex mtx; 
 std::vector<nlohmann::json> members;
 int current_members_index = 0;
 
-void update_data(int r) {
+void update_data() {
   for (int i=0; i<tokens.size(); i++) {
     std::string current_token = tokens[i];
-    std::cout << "idx: '" << i << "'" << ", tk: '"   << current_token   << "'"<< std::endl;
+    std::cout << "idx: '" << i << "'" << ", tk: '"   << current_token   << "'-\n"<< std::endl;
     
     nlohmann::json nets = net::retrieve_networks(current_token);
     //std::cout << std::setw(4) << nets << std::endl;      
 
-    std::string network_id    = "foo"; //nets[0]["id"];
-    std::string network_name  = "bar";//nets[0]["config"]["name"];
+    std::string network_id    = nets[0]["id"];
+    std::string network_name  = nets[0]["config"]["name"];
 
     std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
     std::cout << "idx: '" << i << "'" << ", name: '" << network_name << "'"<< std::endl;
 
     nlohmann::json mems = net::retrieve_members(current_token, network_id);
-    members[i] = mems;
+    std::cout << "idx: '" << i << "'" << ", members: '" << members.size() << "'"<< std::endl;
+    if (members.size() <= 0) {
+      members.push_back(mems);
+    } else {
+      members[i] = mems;
+    }
+    std::cout << "idx: '" << i << "'" << ", members: '" << members.size() << "'"<< std::endl;
     //usleep(5000);
   }
 }
@@ -45,20 +52,29 @@ int main(int argc, char** argv) {
   std::cout << "Number of items in Tokens: " << tokens.size() << std::endl;
   
   // Initialize ncurses
+/*
   initscr();
   curs_set(0);
   keypad(stdscr, TRUE);
   noecho();
   start_color();
   auto [fg, bg] = ux::initial_colors();
+*/
   int w = 0;
+
   if (session::size_config(config) == 0 || tokens.size() == 0) {
     // First session
     std::string token = ux::token_dialog();
     config = session::add_token(config, token);
     session::save_config(config);
   } else {
-    std::thread t1(update_data,0);
+
+    std::future<void> futureResult = std::async(std::launch::async, update_data);
+
+    // Continue with other operations while the task executes asynchronously
+
+    // Wait for the task to complete
+    futureResult.wait();
 
 /**
     while (1) {
@@ -97,13 +113,13 @@ int main(int argc, char** argv) {
 
     }
 **/
-    endwin();
+//    endwin();
   }
   
   // Clean up ncurses
 
   //std::cout << "tab: '" << c << "'" << std::endl;
-  std::cout << "colors: fg: " << fg << ", bg: " <<  bg << " w: "<<  w << std::endl;
+  //std::cout << "colors: fg: " << fg << ", bg: " <<  bg << " w: "<<  w << std::endl;
 
 
   return 0;
