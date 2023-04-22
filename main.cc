@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
       w = ux::sub_window(mems);
       //}
       
-      std::this_thread::sleep_for(std::chrono::seconds(30));
+      std::this_thread::sleep_for(std::chrono::seconds(5));
     }
 
 /**
