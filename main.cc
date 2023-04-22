@@ -79,8 +79,11 @@ int main(int argc, char** argv) {
     while (1) {
       std::future<void> result = std::async(std::launch::async, update_data);
       result.wait();
+    
+      nlohmann::json mems = members[current_members_index];
+      std::cout << std::setw(4) << mems << std::endl;
+
       std::this_thread::sleep_for(std::chrono::seconds(30));
-      //mems = net::retrieve_members(current_token, network_id);
       //if (members.size() > 0) {
       //  w = ux::sub_window(members[0]);
       //}
