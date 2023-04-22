@@ -68,21 +68,25 @@ int main(int argc, char** argv) {
     session::save_config(config);
   } else {
 
-    std::future<void> result = std::async(std::launch::async, update_data);
+    
 
     // Continue with other operations while the task executes asynchronously
 
     // Wait for the task to complete
-    result.wait();
 
-/**
+
+
     while (1) {
+      std::future<void> result = std::async(std::launch::async, update_data);
+      result.wait();
+      std::this_thread::sleep_for(std::chrono::seconds(30));
       //mems = net::retrieve_members(current_token, network_id);
-      if (members.size() > 0) {
-        w = ux::sub_window(members[0]);
-      }
+      //if (members.size() > 0) {
+      //  w = ux::sub_window(members[0]);
+      //}
     }
 
+/**
 
 
       std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
