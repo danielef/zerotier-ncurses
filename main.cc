@@ -72,14 +72,6 @@ int main(int argc, char** argv) {
     session::save_config(config);
   } else {
 
-    
-
-    // Continue with other operations while the task executes asynchronously
-
-    // Wait for the task to complete
-
-
-
     while (1) {
       std::future<void> result = std::async(std::launch::async, update_data);
       result.wait();
@@ -89,7 +81,7 @@ int main(int argc, char** argv) {
 
       std::this_thread::sleep_for(std::chrono::seconds(30));
       //if (members.size() > 0) {
-      //  w = ux::sub_window(members[0]);
+      w = ux::sub_window(mems);
       //}
     }
 
@@ -123,7 +115,7 @@ int main(int argc, char** argv) {
 
     }
 **/
-//    endwin();
+    endwin();
   }
   
   // Clean up ncurses
