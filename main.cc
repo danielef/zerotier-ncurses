@@ -55,14 +55,14 @@ int main(int argc, char** argv) {
   std::cout << "Number of items in Tokens: " << tokens.size() << std::endl;
   
   // Initialize ncurses
-/*
+
   initscr();
   curs_set(0);
   keypad(stdscr, TRUE);
   noecho();
   start_color();
   auto [fg, bg] = ux::initial_colors();
-*/
+
   int w = 0;
 
   if (session::size_config(config) == 0 || tokens.size() == 0) {
