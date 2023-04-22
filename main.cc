@@ -17,26 +17,30 @@ int current_members_index = 0;
 void update_data() {
   for (int i=0; i<tokens.size(); i++) {
     std::string current_token = tokens[i];
+#ifdef DEBUG_ENABLED
     std::cout << "idx: '" << i << "'" << ", tk: '"   << current_token   << "'-\n"<< std::endl;
-    
+#endif    
     nlohmann::json nets = net::retrieve_networks(current_token);
     //std::cout << std::setw(4) << nets << std::endl;      
 
     std::string network_id    = nets[0]["id"];
     std::string network_name  = nets[0]["config"]["name"];
-
+#ifdef DEBUG_ENABLED
     std::cout << "idx: '" << i << "'" << ", id: '"   << network_id   << "'"<< std::endl;
     std::cout << "idx: '" << i << "'" << ", name: '" << network_name << "'"<< std::endl;
-
+#endif
     nlohmann::json mems = net::retrieve_members(current_token, network_id);
+#ifdef DEBUG_ENABLED
     std::cout << "idx: '" << i << "'" << ", members: '" << members.size() << "'"<< std::endl;
+#endif
     if (members.size() <= 0) {
       members.push_back(mems);
     } else {
       members[i] = mems;
     }
+#ifdef DEBUG_ENABLED
     std::cout << "idx: '" << i << "'" << ", members: '" << members.size() << "'"<< std::endl;
-    //usleep(5000);
+#endif
   }
 }
 
