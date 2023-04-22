@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
   // Clean up ncurses
 
   //std::cout << "tab: '" << c << "'" << std::endl;
-  //std::cout << "colors: fg: " << fg << ", bg: " <<  bg << " w: "<<  w << std::endl;
+  std::cout << "colors: fg: " << fg << ", bg: " <<  bg << " w: "<<  w << std::endl;
 
 
   return 0;
