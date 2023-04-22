@@ -11,7 +11,6 @@
 
 nlohmann::json config;
 nlohmann::json tokens;
-std::mutex mtx; 
 std::vector<nlohmann::json> members;
 int current_members_index = 0;
 
@@ -69,12 +68,12 @@ int main(int argc, char** argv) {
     session::save_config(config);
   } else {
 
-    std::future<void> futureResult = std::async(std::launch::async, update_data);
+    std::future<void> result = std::async(std::launch::async, update_data);
 
     // Continue with other operations while the task executes asynchronously
 
     // Wait for the task to complete
-    futureResult.wait();
+    result.wait();
 
 /**
     while (1) {
