@@ -18,8 +18,7 @@ namespace net {
     CURLcode res;
     std::string response;
     
-    
-    
+    curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();
     if(curl) {
       // Set the request URL
@@ -55,7 +54,6 @@ namespace net {
     nlohmann::json data;
     try {
       std::string url = "https://my.zerotier.com/api/network";
-      std::cout << url << std::endl;
       std::string req = make_json_request(url, token);
       data = nlohmann::json::parse(req);
     } catch (nlohmann::detail::parse_error& e) {
