@@ -79,10 +79,12 @@ int main(int argc, char** argv) {
       nlohmann::json mems = members[current_members_index];
       //std::cout << std::setw(4) << mems << std::endl;
 
-      std::this_thread::sleep_for(std::chrono::seconds(30));
+      
       //if (members.size() > 0) {
       w = ux::sub_window(mems);
       //}
+      
+      std::this_thread::sleep_for(std::chrono::seconds(30));
     }
 
 /**
