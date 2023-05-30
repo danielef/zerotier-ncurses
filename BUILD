@@ -1,5 +1,5 @@
 cc_binary(
-    name = "foo",
+    name = "zerotier-ncurses",
     srcs = ["main.cc"],
     deps = [":net", ":session", ":ux", "@com_github_nlohmann_json//:json"],
     copts = ["-std=c++17"],
